@@ -28,10 +28,11 @@ class CircularLinkedList {
         let newNode = new Node(data);
         if (this.head) {
             let tmpNode = this.head;
-            while (tmpNode.next) {
+            while (tmpNode.next !== this.head) {
                 tmpNode = tmpNode.next;
             }
             newNode.prev = tmpNode;
+            newNode.next = tmpNode.next;
             tmpNode.next = newNode;
         }
         else {
@@ -57,6 +58,7 @@ class CircularLinkedList {
         if (nodeToBeDeleted === this.head) {
             this.head.next.prev = null;
             this.head = this.head.next;
+            this.head.next = this.head;
         }
         else if (nodeToBeDeleted) {
             while (tmpNode.next !== nodeToBeDeleted) {
@@ -78,6 +80,7 @@ class CircularLinkedList {
             listToPrint += " --> " + tmpNode.data;
             tmpNode = tmpNode.next;
         }
+        listToPrint += " --> " + tmpNode.data;
         console.log(listToPrint);
     }
 
@@ -104,12 +107,12 @@ c1.append(8);
 c1.traverse('Appending node at the end');
 
 c1.insertAfter(c1.head.next, 10);
-//c1.traverse('Inserting node after particular node');
+c1.traverse('Inserting node after particular node');
 
 c1.deleteNode(c1.head.next);
-//c1.traverse('Deleting node after particular node');
+c1.traverse('Deleting node after particular node');
 
 c1.deleteNode(c1.head);
-//c1.traverse('Deleting node after particular node');
+c1.traverse('Deleting node after particular node');
 
 //c1.reverseTraversal("Reverse");
