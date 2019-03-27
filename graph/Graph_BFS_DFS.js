@@ -61,24 +61,24 @@ function bfs(G) {
   let i = 0;
 
   const list = G.AdjList
-  const keys = Array.from(G.AdjList.keys())
+  const keys = Array.from(G.AdjList.keys()) // Conversion of map into array
   let queue = []
-  let visited = {}
-  queue.push(keys[0]);
+  let visited = {} // To avoid traversal of same node
+  queue.push(keys[0]); // Start with first vertex
 
-  let bfsOutput = "BFS Output : Start";
+  let bfsOutput = "BFS Output : Start"; // Output String
 
   while (queue.length != 0) {
     //console.log(visited);
-    if (visited[queue[0]]) {
-      queue.shift()
+    if (visited[queue[0]]) { // Check top of the queue is visited or not 
+      queue.shift() // Remove top of the queue if visited
     } else {
-      visited[queue[0]] = true;
+      visited[queue[0]] = true; // Mark unvisited item visited
       list.get(queue[0]).forEach(function (value) {
-        queue.push(value)
+        queue.push(value) // Add all adjcent items at the end of the queue
       });
-      bfsOutput += " => " + queue[0]
-      queue.shift()
+      bfsOutput += " => " + queue[0] // Print top of the queue
+      queue.shift() // Remove top of the queue
     }
   }
   console.log(bfsOutput);
@@ -88,21 +88,21 @@ function dfs(G) {
   let i = 0;
 
   const list = G.AdjList
-  const keys = Array.from(G.AdjList.keys())
+  const keys = Array.from(G.AdjList.keys()) // Conversion of map into array
   let stack = []
-  let visited = {}
-  stack.push(keys[0]);
+  let visited = {} // To avoid traversal of same node
+  stack.push(keys[0]); // Start with first vertex
 
-  let dfsOutput = "DFS Output : Start";
+  let dfsOutput = "DFS Output : Start"; // Output String
 
   while (stack.length != 0) {
-    if (visited[stack[stack.length - 1]]) {
-      stack.pop()
+    if (visited[stack[stack.length - 1]]) { // Check top of the stack is visited or not 
+      stack.pop() // Remove top of the stack if visited
     } else {
-      dfsOutput += " => " + stack[stack.length - 1]
-      visited[stack[stack.length - 1]] = true;
+      dfsOutput += " => " + stack[stack.length - 1] // Print top of the stack
+      visited[stack[stack.length - 1]] = true; // Mark unvisited item visited
       list.get(stack[stack.length - 1]).forEach(function (value) {
-        stack.push(value)
+        stack.push(value) // Push all adjcent items at the top of the stack
       });
     }
   }
@@ -111,3 +111,18 @@ function dfs(G) {
 
 bfs(G)
 dfs(G);
+
+/*
+  Sample Output 
+  
+  Map {
+  '1' => Set { '2', '3' },
+  '2' => Set { '1', '4', '5' },
+  '3' => Set { '1', '5' },
+  '4' => Set { '2', '5', '6' },
+  '5' => Set { '2', '3', '4', '6' },
+  '6' => Set { '4', '5' } }
+
+  BFS Output : Start => 1 => 2 => 3 => 4 => 5 => 6
+  DFS Output : Start => 1 => 3 => 5 => 6 => 4 => 2
+*/
