@@ -69,5 +69,4 @@ bfs(G)
   '6' => Set { '4', '5' } }
 
   BFS Output : Start => 1 => 2 => 3 => 4 => 5 => 6
-  DFS Output : Start => 1 => 3 => 5 => 6 => 4 => 2
 */
