@@ -2,10 +2,17 @@
 class Graph {
   constructor(noOfVertices) {
     // Initialize graph with no of vertices and Adjlist which will be array of link list
-    this.noOfVertices = noOfVertices;
+    this._noOfVertices = noOfVertices;
     this.AdjList = new Map();
   }
 
+  get noOfVertices() {
+    return this._noOfVertices;
+  }
+
+  set noOfVertices(newNumber) {
+    this._noOfVertices = newNumber;   // validation could be checked here such as only allowing non numerical values
+  }
   addVertex(vertex) {
     // Function to add vertex in graph, Initailly it will set empty array as value
     this.AdjList.set(vertex, new Set())
@@ -50,3 +57,57 @@ G.addEdge('6', '5')
 G.printGraph();
 
 
+function bfs(G) {
+  let i = 0;
+
+  const list = G.AdjList
+  const keys = Array.from(G.AdjList.keys())
+  let queue = []
+  let visited = {}
+  queue.push(keys[0]);
+
+  let bfsOutput = "BFS Output : Start";
+
+  while (queue.length != 0) {
+    //console.log(visited);
+    if (visited[queue[0]]) {
+      queue.shift()
+    } else {
+      visited[queue[0]] = true;
+      list.get(queue[0]).forEach(function (value) {
+        queue.push(value)
+      });
+      bfsOutput += " => " + queue[0]
+      queue.shift()
+    }
+  }
+  console.log(bfsOutput);
+}
+
+function dfs(G) {
+  let i = 0;
+
+  const list = G.AdjList
+  const keys = Array.from(G.AdjList.keys())
+  let stack = []
+  let visited = {}
+  stack.push(keys[0]);
+
+  let dfsOutput = "DFS Output : Start";
+
+  while (stack.length != 0) {
+    if (visited[stack[stack.length - 1]]) {
+      stack.pop()
+    } else {
+      dfsOutput += " => " + stack[stack.length - 1]
+      visited[stack[stack.length - 1]] = true;
+      list.get(stack[stack.length - 1]).forEach(function (value) {
+        stack.push(value)
+      });
+    }
+  }
+  console.log(dfsOutput);
+}
+
+bfs(G)
+dfs(G);
