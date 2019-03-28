@@ -28,30 +28,30 @@ G.printGraph();
 
 
 function bfs(G) {
-  let i = 0;
+    let i = 0;
 
-  const list = G.AdjList
-  const keys = Array.from(G.AdjList.keys()) // Conversion of map into array
-  let queue = []
-  let visited = {} // To avoid traversal of same node
-  queue.push(keys[0]); // Start with first vertex
+    const list = G.AdjList
+    const keys = Array.from(G.AdjList.keys()) // Conversion of map into array
+    let queue = []
+    let visited = {} // To avoid traversal of same node
+    queue.push(keys[0]); // Start with first vertex
 
-  let bfsOutput = "BFS Output : Start"; // Output String
+    let bfsOutput = "BFS Output : Start"; // Output String
 
-  while (queue.length != 0) {
-    //console.log(visited);
-    if (visited[queue[0]]) { // Check top of the queue is visited or not 
-      queue.shift() // Remove top of the queue if visited
-    } else {
-      visited[queue[0]] = true; // Mark unvisited item visited
-      list.get(queue[0]).forEach(function (value) {
-        queue.push(value) // Add all adjcent items at the end of the queue
-      });
-      bfsOutput += " => " + queue[0] // Print top of the queue
-      queue.shift() // Remove top of the queue
+    while (queue.length != 0) {
+        //console.log(visited);
+        if (visited[queue[0]]) { // Check top of the queue is visited or not 
+            queue.shift() // Remove top of the queue if visited
+        } else {
+            visited[queue[0]] = true; // Mark unvisited item visited
+            list.get(queue[0]).forEach(function (value) {
+                queue.push(value) // Add all adjcent items at the end of the queue
+            });
+            bfsOutput += " => " + queue[0] // Print top of the queue
+            queue.shift() // Remove top of the queue
+        }
     }
-  }
-  console.log(bfsOutput);
+    console.log(bfsOutput);
 }
 
 
